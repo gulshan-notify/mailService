@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate PDF</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Generate PDF from Content</h1>
+    <textarea id="content" placeholder="Write your content here..."></textarea>
+    <button onclick="generatePDF()">Generate PDF</button>
+
+    <script>
+        async function generatePDF() {
+            // Import jsPDF
+            const { jsPDF } = window.jspdf;
+
+            // Get content from textarea
+            const content = document.getElementById("content").value;
+
+            if (!content.trim()) {
+                alert("Please write some content before generating the PDF!");
+                return;
+            }
+
+            // Create a new jsPDF instance
+            const pdf = new jsPDF();
+
+            // Add content to the PDF
+            pdf.text(content, 10, 10);
+
+            // Save the PDF
+            pdf.save("generated.pdf");
+        }
+    </script>
+
+</body>
+</html>
